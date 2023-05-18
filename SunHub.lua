@@ -5,7 +5,7 @@ local Window = OrionLib:MakeWindow({Name = "SubHub | Blox Fruit", HidePremium = 
 
 _G.AutoFarm
 _G.SelectWeapon
-
+_G.AutoHaki
 
 if game.PlaceId == 2753915549 then
     World1 = true
