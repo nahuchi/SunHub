@@ -2,11 +2,11 @@ if game.PlaceId == 2753915549 or game.PlaceId == 4442272183 or game.PlaceId == 7
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 local Window = OrionLib:MakeWindow({Name = "SubHub | Blox Fruit", HidePremium = false, SaveConfig = true, ConfigFolder = "SubHub"})
 
-
+--Values
 _G.AutoFarm = true
 _G.SelectWeapon = true
 _G.AutoHaki = true
-
+--Funtions
 if game.PlaceId == 2753915549 then
     World1 = true
 elseif game.PlaceId == 4442272183 then
@@ -511,24 +511,36 @@ for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) 
     end
 end
 
-
+--Tabs
 local FarmTab = Window:MakeTab({
 	Name = "Farm",
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
+--Dropdown
 FarmTab:AddDropdown({
 	Name = "Select Weapon",
 	Default = "1",
 	Options = {"1", "2"},
 	Callback = function(Value)
 		_G.SelectWeapon = value
+          SelectWeapon()
 	end    
 })
+--Toggle
 FarmTab:AddToggle({
 	Name = "Auto Farm",
 	Default = false,
 	Callback = function(Value)
-		print(Value)
+		_G.AutoFarm = value
+         AutoFarm()
 	end    
 })
+
+
+
+
+
+
+end
+OrionLib:Init()
