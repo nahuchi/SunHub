@@ -525,29 +525,6 @@ function AutoFarm()
                 end
             end
         end)
-    elseif game:GetService("Players").LocalPlayer.PlayerGui.Quest.QuestBoard.Visible == true then
-        CheckQuest()
-        if game:GetService("Workspace").Monster:GetDescendants(Ms) then
-            pcall(function()
-                equip()
-                for i, v in pairs(game:GetService("Workspace").Monster:GetDescendants()) do
-                    CheckQuest()
-                    if v.Name == Ms then
-                        repeat wait()
-                            if v.Humanoid.Health > 0 then
-                                VirtualUser:CaptureController()
-                                VirtualUser:ClickButton1(Vector2.new(851, 158), game:GetService("Workspace").Camera.CFrame)
-                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,0,DistanceMob)
-                            end
-                        until v.Humanoid.Health <= 0 or _G.AutoFarm == false or not v.Parent 
-                    end
-                end
-            end
-            )
-        else
-        end
-    end
-end
 
 --Tabs
 local FarmTab = Window:MakeTab({
