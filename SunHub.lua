@@ -503,13 +503,72 @@ function AutoHaki()
     end
 end
 
-WeaponList = {}
-    
-for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do  
-    if v:IsA("Tool") then
-        table.insert(WeaponList ,v.Name)
+spawn(function()
+    while wait() do
+        if _G.AutoFarm then
+            pcall(function()
+                local QuestTitle = game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text
+                if not string.find(QuestTitle, NameMon) then
+                    StartMagnet = false
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+                end
+                if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
+                    StartMagnet = false
+                    CheckQuest()
+                    repeat wait() topos(CFrameQuest) until (CFrameQuest.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 3 or not _G.AutoFarm
+                    if (CFrameQuest.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 3 then
+                        wait(1.2)
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest",NameQuest,LevelQuest)
+                        wait(0.5)
+                    end
+                elseif game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
+                    CheckQuest()
+                    if game:GetService("Workspace").Enemies:FindFirstChild(Mon) then
+                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                            if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+                                if v.Name == Mon then
+                                    if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) then
+                                        repeat task.wait()
+                                            EquipWeapon(_G.SelectWeapon)
+                                            AutoHaki()                                            
+                                            PosMon = v.HumanoidRootPart.CFrame
+                                            topos(v.HumanoidRootPart.CFrame * CFrame.new(5,10,7))
+                                            v.HumanoidRootPart.CanCollide = false
+                                            v.Humanoid.WalkSpeed = 0
+                                            v.Head.CanCollide = false
+                                            v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+                                            StartMagnet = true
+                                            game:GetService'VirtualUser':CaptureController()
+                                            game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                                        until not _G.AutoFarm or v.Humanoid.Health <= 0 or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
+                                    else
+                                        StartMagnet = false
+                                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+                                    end
+                                end
+                            end
+                        end
+                    else
+                        StartMagnet = false
+                        if game:GetService("ReplicatedStorage"):FindFirstChild(Mon) then
+                            topos(game:GetService("ReplicatedStorage"):FindFirstChild(Mon).HumanoidRootPart.CFrame * CFrame.new(5,10,7))
+                        else
+                            if (CFrameQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 15 then
+                                if PosMon ~= nil then
+                                    topos(PosMon * CFrame.new(5,10,7))
+                                else
+                                    if OldPos ~= nil then
+                                        topos(OldPos.Position)
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+            end)
+        end
     end
-end
+end)
 
 --Tabs
 local FarmTab = Window:MakeTab({
@@ -518,16 +577,35 @@ local FarmTab = Window:MakeTab({
 	PremiumOnly = false
 })
 --Dropdown
+WeaponList = {}
+    
+for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do  
+    if v:IsA("Tool") then
+        table.insert(WeaponList ,v.Name)
+    end
+end
 FarmTab:AddDropdown({
 	Name = "Select Weapon",
 	Default = "1",
-	Options = {"1", "2"},
+	Options = {"Mlee", "Sword"},
 	Callback = function(Value)
 		_G.SelectWeapon = value
           SelectWeapon()
 	end    
 })
+
+
 --Toggle
+FarmTab:AddToggle({
+	Name = "Auto Haki",
+	Default = false,
+	Callback = function(Value)
+		_G.AutoHaki = value
+         AutoHaki()
+	end    
+})
+
+
 FarmTab:AddToggle({
 	Name = "Auto Farm",
 	Default = false,
