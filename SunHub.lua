@@ -504,6 +504,10 @@ function AutoHaki()
 end
 
 function AutoFarm()
+ spawn(function()
+    while wait() do
+        if _G.AutoFarm then
+            pcall(function()
                 local QuestTitle = game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text
                 if not string.find(QuestTitle, NameMon) then
                     StartMagnet = false
@@ -565,6 +569,7 @@ function AutoFarm()
             end)
         end
     end
+end)
 
 --Tabs
 local FarmTab = Window:MakeTab({
