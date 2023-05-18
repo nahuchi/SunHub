@@ -3,9 +3,9 @@ local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shl
 local Window = OrionLib:MakeWindow({Name = "SubHub | Blox Fruit", HidePremium = false, SaveConfig = true, ConfigFolder = "SubHub"})
 
 
-_G.AutoFarm
-_G.SelectWeapon
-_G.AutoHaki
+_G.AutoFarm = true
+_G.SelectWeapon = true
+_G.AutoHaki = true
 
 if game.PlaceId == 2753915549 then
     World1 = true
