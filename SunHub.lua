@@ -42,6 +42,6 @@ FarmTab:AddToggle({
 	Name = "Auto Farm",
 	Default = false,
 	Callback = function(Value)
-		print(Value)
+		_G.AutoFarm = value
 	end    
 })
