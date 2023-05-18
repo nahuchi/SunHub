@@ -4,6 +4,7 @@ local Window = OrionLib:MakeWindow({Name = "SubHub | Blox Fruit", HidePremium = 
 --Values
 _G.AutoFarm
 _G.SelectWeapon
+_G.AutoHaki
 
 --Function Haki Buso
 function AutoHaki()
