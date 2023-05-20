@@ -813,7 +813,7 @@ Tab:AddButton({
     end    
 })
 
-if World2 then
+elseif World2 then
 Tab:AddButton({
     Name = "The Cafe",
     Callback = function()
@@ -871,7 +871,7 @@ Tab:AddButton({
     end    
 })
 
-if World3 then
+elseif World3 then
 Tab:AddButton({
     Name = "Great Tree",
     Callback = function()
