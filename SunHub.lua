@@ -1,4 +1,3 @@
-if game.PlaceId == 2753915549 or game.PlaceId == 4442272183 or game.PlaceId == 7449423635 then
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 local Window = OrionLib:MakeWindow({Name = "SubHub | Blox Fruit", HidePremium = false, SaveConfig = true, ConfigFolder = "SubHub"})
 
@@ -8,17 +7,9 @@ _G.SelectWeapon = true
 _G.AutoHaki = true
 _G.CheckQuest = true
 --Funtions
-if game.PlaceId == 2753915549 then
-    World1 = true
-elseif game.PlaceId == 4442272183 then
-    World2 = true
-elseif game.PlaceId == 7449423635 then
-    World3 = true
-end
 
 function CheckQuest() 
     MyLevel = game:GetService("Players").LocalPlayer.Data.Level.Value
-    if World1 then
         if MyLevel == 1 or MyLevel <= 9 then
             Mon = "Bandit [Lv. 5]"
             LevelQuest = 1
@@ -188,7 +179,6 @@ function CheckQuest()
             NameMon = "Galley Captain"
             CFrameQuest = CFrame.new(5259.81982, 37.3500175, 4050.0293, 0.087131381, 0, 0.996196866, 0, 1, 0, -0.996196866, 0, 0.087131381)
         end
-    elseif World2 then
         if MyLevel == 700 or MyLevel <= 724 then
             Mon = "Raider [Lv. 700]"
             LevelQuest = 1
@@ -337,7 +327,6 @@ function CheckQuest()
             NameMon = "Water Fighter"
             CFrameQuest = CFrame.new(-3054.44458, 235.544281, -10142.8193, 0.990270376, -0, -0.13915664, 0, 1, -0, 0.13915664, 0, 0.990270376)
         end
-    elseif World3 then
         if MyLevel == 1500 or MyLevel <= 1524 then
             Mon = "Pirate Millionaire [Lv. 1500]"
             LevelQuest = 1
@@ -813,7 +802,6 @@ Tab:AddButton({
     end    
 })
 
-elseif World2 then
 Tab:AddButton({
     Name = "The Cafe",
     Callback = function()
@@ -870,8 +858,6 @@ Tab:AddButton({
         ForgottenIsland()
     end    
 })
-
-elseif World3 then
 Tab:AddButton({
     Name = "Great Tree",
     Callback = function()
